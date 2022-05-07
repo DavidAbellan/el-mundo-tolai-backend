@@ -19,6 +19,7 @@ var updatePictures = require('../helpers/update_pictures');
 
 router.post('/', async function(req, res, next) {
   let categories = await categoryControl.get_categories()
+  console.log("CATE",categories)
   let username = req.body.username;
   let password = req.body.password;  
  
@@ -27,9 +28,7 @@ router.post('/', async function(req, res, next) {
      }else {*/
         let user = await adminControl.get_author(username,password);
            if (!user) {
-               res.render('admin', {
-                    categories
-               })
+               res.render('admin')
 
            } else {
                LS.clear();

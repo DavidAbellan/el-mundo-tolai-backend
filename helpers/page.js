@@ -6,7 +6,11 @@ var contrColumn = require('../controllers/Column');
 async function page(pageNumber) {
      const pageSize = 10;
      let offset = pageNumber;
+     if (!offset){
+         offset=0;
+     }
      let limit = pageSize;
+
 
     let articles = await modArticle.article.findAll(
         {
@@ -29,6 +33,9 @@ async function column(pageNumber) {
     const pageSize = 2;
     let offset = pageNumber ;
     let limit = pageSize;
+    if (!offset){
+        offset=0;
+    }
 
    let columns = await modColumn.opinion_column.findAll({
     order: [['createdAt','DESC']],
