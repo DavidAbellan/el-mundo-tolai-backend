@@ -55,6 +55,7 @@ router.get('/category', isLogged, function(req,res){
 })
 router.post('/category',isLogged, async function(req,res){
     let name = req.body.name;
+    console.log("prueba");
     let catlenght = await long.large() + 1;
     matcher.match(name).then(resp =>{
         if (!resp) {
