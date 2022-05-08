@@ -1,7 +1,7 @@
 var catControl = require('../controllers/Category');
 async function large () {
- let cats = await catControl.get_categories()
- return cats.length;
+ let cats = await catControl.get_last_code();
+ return cats;
 }
 module.exports = {
     large

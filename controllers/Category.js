@@ -16,8 +16,15 @@ async function get_category_by_code(categorycode){
     let category = await modCategory.category.findOne({where:{id : categorycode}});
     return category;
 }
+async function get_last_code(){
+    categories = modCategory.category.findAll({
+        order : [['code','DESC']],
+    })
+    return categories[0].code;
+}
 
 module.exports = {
+    get_last_code,
     get_categories,
     set_category,
     get_category_by_code
