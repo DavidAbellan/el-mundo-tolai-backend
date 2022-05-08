@@ -17,8 +17,8 @@ async function get_category_by_code(categorycode){
     return category;
 }
 async function get_last_code(){
-    categories = modCategory.category.findAll({
-        order : [['code','DESC']],
+    let categories = await modCategory.category.findAll({
+        order : [['code','DESC']]
     })
     return categories[0].code;
 }
