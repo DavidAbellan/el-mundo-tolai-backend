@@ -4,6 +4,8 @@ var idgen = require('../helpers/id_generator');
 async function set_picture(picture,authorID){
     picture.author_id = authorID;
     picture.id = idgen.get_random_id();
+        //buscar otro alojamiento para fotos 
+
     return await mod.picture.create(picture);
 
 }

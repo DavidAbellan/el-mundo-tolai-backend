@@ -19,7 +19,8 @@ let photo = {
 return await mod.photo.create(photo);
 }
 async function set_photos (photoArray){
-    return await mod.photo.bulkCreate(photoArray);     
+    return await mod.photo.bulkCreate(photoArray);    
+    //buscar otro alojamiento para fotos 
 }
 async function get_main_photo (artId){
     let principal = await mod.photo.findOne({where : {articleId : artId}});
