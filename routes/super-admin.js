@@ -57,7 +57,7 @@ router.get('/category', isLogged, function(req,res){
 })
 router.post('/category',isLogged, async function(req,res){
     let name = req.body.name;
-    let catlenght = await long.large() + 1;
+    let catlenght = await long.large() + 2;
     matcher.match(name).then(resp =>{
         if (!resp) {
             categoryController.set_category(name,catlenght).then(resp =>{
