@@ -19,7 +19,7 @@ async function get_category_by_code(categorycode){
 }
 async function get_last_code(){
     let categories = await modCategory.category.findAll();
-    return Object.keys(categories).length;
+    return categories.length;
     
 }
 
