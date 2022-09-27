@@ -12,7 +12,10 @@ var adminRouter = require('./routes/admin');
 var flash = require('connect-flash');
 var hbs = require('hbs');
 var cors = require('cors');
-
+const bodyParser = require('body-parser');
+const upload = require('./config/multer');
+const cloudinary = require('./config/cloudinary');
+const fs = require('fs');
 
 var app = express();
 
@@ -67,5 +70,33 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+/*Cloudinary 
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+app.use('/upload-images', upload.array('image'), async (req,res) => {
+  const uploader = async(path) => await cloudinary.uploads(path,'Images');
+    if (req.method ==='POST'){
+      const urls = [];
+      const files = req.files;
+      for (file of files){
+        const {path} = file ;
+        const newPath = await uploader(path);
+        urls.push(newPath);
+        fs.unlinkSync(path);
+
+      }
+      res.status(200).json({
+        message: "image uploaded successfully!",
+        data : urls
+      })
+    }else {
+      res.status(405).json({
+        err : `${req.method} method not allowed`
+      })
+    }
+    }
+ )*/
+
 
 module.exports = app;

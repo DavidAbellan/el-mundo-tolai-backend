@@ -16,6 +16,8 @@ var idgen = require('../helpers/id_generator');
 var removeArticle = require('../helpers/remove_article');
 var removeColumn = require('../helpers/remove_column');
 var updatePictures = require('../helpers/update_pictures');
+var cloudSaving = require("../config/cloudinary");
+const CLOUDINARY_DEFAULT_PICTURE ="https://res.cloudinary.com/dsvuhzcsh/image/upload/v1664199469/articles/znk3zb4iaq0urs0mqn5y.jpg";
 
 router.post('/', async function(req, res, next) {
   let categories = await categoryControl.get_categories()
@@ -70,19 +72,21 @@ router.post('/new', isLogged, upload.array('file',3),async function(req,res,next
             author_id: authId,
             outstanding : art
         });
-            
-     
-        
+   
     if (req.files.length !== 0 && req.files != undefined) {
             pictures =req.files;
             for (picture of pictures){
                 picture.id = idgen.get_random_id();
                 picture.articleId = artID;
-            }
-            await photoControl.set_photos(pictures);
+                let photo = await photoControl.set_photo(picture);
+                let photCl = await cloudSaving.uploadToCloud(photo.path,false);
+                photo.path = photCl.url;
+                await photoControl.update_path_photo(photo);
+             }
          
         } else {
-             await photoControl.set_photo(artID);
+                photo.path = CLOUDINARY_DEFAULT_PICTURE;
+                await photoControl.set_default_photo(artID);
 
         }
 

@@ -2,12 +2,14 @@ var express = require('express');
 var router = express.Router();
 var authorController = require('../controllers/Author');
 var categoryController = require('../controllers/Category');
+var pictureController = require('../controllers/Picture');
 var upload = require('../config/multer');
 var matcher = require('../helpers/match_category');
 var long = require('../helpers/category_length');
 var isLogged = require('../middleware/isLogged');
 var updateAuthor = require('../helpers/update_user');
 var setPicture = require('../helpers/set_avatar_from_author');
+
 
 router.get('/users',isLogged , async (req,res) =>{
    let authors = await authorController.get_authors();
@@ -86,7 +88,11 @@ router.post('/create',isLogged, upload.single('file'), async function(req,res){
         res.render('author')
     } else {
         let newauthor = await authorController.set_author(name,username,password,superAdmin,description);
+        if(!req.file){
+        await pictureController.set_default_potrait(newauthor.id);
+        }else {
         await setPicture.set_avatar(req.file, newauthor.id);
+        }
         let authors = await authorController.get_authors();
         res.render('users',{
             authors

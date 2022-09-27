@@ -9,7 +9,8 @@
     test : {
       dialect:'mysql',
       storage: ':memory;'
-   } }
+   } }*/
+   /*
   module.exports = {
     development : {
         dialect : 'mysql',

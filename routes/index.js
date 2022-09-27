@@ -43,7 +43,6 @@ router.get('/:page?', async function(req, res, next) {
     columns = await formatCol.format(columns)
     let authors = await authorController.get_authors();
     let categories = await categoryControl.get_categories();
-    
     res.send({
         timer,
         articles,
@@ -172,9 +171,9 @@ router.get('/getpicture/:idArticle', async (req,res,next) =>{
         photos
     })
 })
-/*router.get('/create/first/author',function(req,res,next){
+router.get('/create/first/author',function(req,res,next){
     res.render('authorFirst');
-});*/
+});
 router.post('/create/author', upload.single('file'), async function(req,res,next){
     let name= req.body.name;
     let username = req.body.username;
@@ -184,6 +183,9 @@ router.post('/create/author', upload.single('file'), async function(req,res,next
     if(req.body.switch ==='on'){
         superAdmin = true
     }
+    /*if(!req.file){
+
+    }*/
     if (password !== req.body.rpassword){
         res.render('authorFirst')
     } else {

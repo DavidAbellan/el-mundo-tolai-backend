@@ -2,7 +2,8 @@ var modCategory = require('../models');
 var idgen = require('../helpers/id_generator');
 
 async function get_categories(){
-    return await modCategory.category.findAll();
+    let categories = await modCategory.category.findAll();
+    return categories;
 }
 async function set_category(name, code){
     let category = new Object ({
@@ -17,10 +18,9 @@ async function get_category_by_code(categorycode){
     return category;
 }
 async function get_last_code(){
-    let categories = await modCategory.category.findAll({
-        order : [['code','DESC']]
-    })
-    return categories[0].code;
+    let categories = await modCategory.category.findAll();
+    return Object.keys(categories).length;
+    
 }
 
 module.exports = {

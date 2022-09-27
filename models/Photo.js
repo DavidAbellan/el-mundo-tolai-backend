@@ -7,7 +7,7 @@ module.exports =(sequelize,dataTypes) => {
     mimetype: {type :dataTypes.STRING , defaultValue:"image/png"},
     destination: {type :dataTypes.STRING , defaultValue:"/public/images/"},
     filename: {type :dataTypes.STRING , defaultValue:"default-pshe-square"},
-    path: {type :dataTypes.STRING , defaultValue:"/public/images/default-pshe-square"},
+    path: {type :dataTypes.STRING(200) , defaultValue:"https://res.cloudinary.com/dsvuhzcsh/image/upload/v1664199469/articles/znk3zb4iaq0urs0mqn5y.jpg"},
     size : {type : dataTypes.INTEGER, defaultValue : 0},
     photo_author :{type :dataTypes.STRING , defaultValue:"archive.org"},
     articleId :  {type: dataTypes.STRING, required:true},
